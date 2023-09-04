@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,11 +15,8 @@ namespace ExpenseApp.Data
         }
 
         public DbSet<Employee> Employees { get; set; } = default!;
-
         public DbSet<Expense> Expenses { get; set; } = default!;
-        
-        public DbSet<ExpenseLine> ExpenseLines { get; set; } = default!;
-        
-        public DbSet<ExpenseApp.Models.Item> Item { get; set; } = default!;
+        public DbSet<Expenseline> Expenselines { get; set; } = default!;
+        public DbSet<Item> items { get; set; } = default!;
     }
 }

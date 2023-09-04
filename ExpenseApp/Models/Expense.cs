@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ExpenseApp.Models
 {
-    [Index("EmployeeId", IsUnique = true)]
     public class Expense
     {
         public int Id { get; set; }
@@ -14,8 +13,9 @@ namespace ExpenseApp.Models
         public string Status { get; set; } = "NEW";
         [Column(TypeName = "decimal(11,2)")]
         public decimal Total { get; set; } = 0;
+
         public int EmployeeId { get; set; }
         public virtual Employee? Employee { get; set; }
-        public virtual ICollection<ExpenseLine>? ExpenseLines { get;}
+        public virtual ICollection<Expenseline>? Expenseline { get; set;}
     }
 }

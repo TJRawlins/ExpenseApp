@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace ExpenseApp.Controllers
 
         // GET: api/Employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
           if (_context.Employees == null)
           {
@@ -88,7 +88,7 @@ namespace ExpenseApp.Controllers
         {
           if (_context.Employees == null)
           {
-              return Problem("Entity set 'AppDbContext.Employee'  is null.");
+              return Problem("Entity set 'AppDbContext.Employees'  is null.");
           }
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();

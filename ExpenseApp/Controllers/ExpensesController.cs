@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -80,27 +80,6 @@ namespace ExpenseApp.Controllers
 
             return NoContent();
         }
-
-        // PUT: api/Expenses/pay/{expenseId}
-        [HttpPut("pay/{expenseId}")]
-        public async Task<IActionResult> PayExpense(int expenseId, Expense expense)
-        {
-            if (expenseId != expense.Id)
-            {
-                return BadRequest();
-            }
-            var employee = await _context.Employees.FindAsync(expense.EmployeeId);
-
-            expense.Status = "PAID";
-            employee!.ExpensesPaid += expense.Total;
-            employee.ExpensesDue -= expense.Total;
-
-            await _context.SaveChangesAsync();
-
-            return await PutExpense(expenseId, expense);
-        }
-
-
 
         // POST: api/Expenses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

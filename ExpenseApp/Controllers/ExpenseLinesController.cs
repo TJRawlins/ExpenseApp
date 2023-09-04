@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,55 +12,55 @@ namespace ExpenseApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpenseLinesController : ControllerBase
+    public class ExpenselinesController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public ExpenseLinesController(AppDbContext context)
+        public ExpenselinesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ExpenseLines
+        // GET: api/Expenselines
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExpenseLine>>> GetExpenseLines()
+        public async Task<ActionResult<IEnumerable<Expenseline>>> GetExpenselines()
         {
-          if (_context.ExpenseLines == null)
+          if (_context.Expenselines == null)
           {
               return NotFound();
           }
-            return await _context.ExpenseLines.ToListAsync();
+            return await _context.Expenselines.ToListAsync();
         }
 
-        // GET: api/ExpenseLines/5
+        // GET: api/Expenselines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ExpenseLine>> GetExpenseLine(int id)
+        public async Task<ActionResult<Expenseline>> GetExpenseline(int id)
         {
-          if (_context.ExpenseLines == null)
+          if (_context.Expenselines == null)
           {
               return NotFound();
           }
-            var expenseLine = await _context.ExpenseLines.FindAsync(id);
+            var expenseline = await _context.Expenselines.FindAsync(id);
 
-            if (expenseLine == null)
+            if (expenseline == null)
             {
                 return NotFound();
             }
 
-            return expenseLine;
+            return expenseline;
         }
 
-        // PUT: api/ExpenseLines/5
+        // PUT: api/Expenselines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExpenseLine(int id, ExpenseLine expenseLine)
+        public async Task<IActionResult> PutExpenseline(int id, Expenseline expenseline)
         {
-            if (id != expenseLine.Id)
+            if (id != expenseline.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(expenseLine).State = EntityState.Modified;
+            _context.Entry(expenseline).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace ExpenseApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExpenseLineExists(id))
+                if (!ExpenselineExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace ExpenseApp.Controllers
             return NoContent();
         }
 
-        // POST: api/ExpenseLines
+        // POST: api/Expenselines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ExpenseLine>> PostExpenseLine(ExpenseLine expenseLine)
+        public async Task<ActionResult<Expenseline>> PostExpenseline(Expenseline expenseline)
         {
-          if (_context.ExpenseLines == null)
+          if (_context.Expenselines == null)
           {
-              return Problem("Entity set 'AppDbContext.ExpenseLines'  is null.");
+              return Problem("Entity set 'AppDbContext.Expenselines'  is null.");
           }
-            _context.ExpenseLines.Add(expenseLine);
+            _context.Expenselines.Add(expenseline);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExpenseLine", new { id = expenseLine.Id }, expenseLine);
+            return CreatedAtAction("GetExpenseline", new { id = expenseline.Id }, expenseline);
         }
 
-        // DELETE: api/ExpenseLines/5
+        // DELETE: api/Expenselines/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExpenseLine(int id)
+        public async Task<IActionResult> DeleteExpenseline(int id)
         {
-            if (_context.ExpenseLines == null)
+            if (_context.Expenselines == null)
             {
                 return NotFound();
             }
-            var expenseLine = await _context.ExpenseLines.FindAsync(id);
-            if (expenseLine == null)
+            var expenseline = await _context.Expenselines.FindAsync(id);
+            if (expenseline == null)
             {
                 return NotFound();
             }
 
-            _context.ExpenseLines.Remove(expenseLine);
+            _context.Expenselines.Remove(expenseline);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ExpenseLineExists(int id)
+        private bool ExpenselineExists(int id)
         {
-            return (_context.ExpenseLines?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Expenselines?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,24 +23,24 @@ namespace ExpenseApp.Controllers
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetItem()
+        public async Task<ActionResult<IEnumerable<Item>>> Getitems()
         {
-          if (_context.Item == null)
+          if (_context.items == null)
           {
               return NotFound();
           }
-            return await _context.Item.ToListAsync();
+            return await _context.items.ToListAsync();
         }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
         {
-          if (_context.Item == null)
+          if (_context.items == null)
           {
               return NotFound();
           }
-            var item = await _context.Item.FindAsync(id);
+            var item = await _context.items.FindAsync(id);
 
             if (item == null)
             {
@@ -86,11 +86,11 @@ namespace ExpenseApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(Item item)
         {
-          if (_context.Item == null)
+          if (_context.items == null)
           {
-              return Problem("Entity set 'AppDbContext.Item'  is null.");
+              return Problem("Entity set 'AppDbContext.items'  is null.");
           }
-            _context.Item.Add(item);
+            _context.items.Add(item);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetItem", new { id = item.Id }, item);
@@ -100,17 +100,17 @@ namespace ExpenseApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItem(int id)
         {
-            if (_context.Item == null)
+            if (_context.items == null)
             {
                 return NotFound();
             }
-            var item = await _context.Item.FindAsync(id);
+            var item = await _context.items.FindAsync(id);
             if (item == null)
             {
                 return NotFound();
             }
 
-            _context.Item.Remove(item);
+            _context.items.Remove(item);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -118,7 +118,7 @@ namespace ExpenseApp.Controllers
 
         private bool ItemExists(int id)
         {
-            return (_context.Item?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.items?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
