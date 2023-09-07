@@ -21,6 +21,7 @@ namespace ExpenseApp.Controllers
             _context = context;
         }
 
+
         // GET: api/Expenses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
@@ -77,6 +78,22 @@ namespace ExpenseApp.Controllers
                     throw;
                 }
             }
+
+            return NoContent();
+        }
+
+        // [PUT: /api/expenses/pay/{expenseId}]
+        [HttpPut("pay/{expenseId}")]
+        public async Task<IActionResult> PayExpense(int expenseId, Employee employee)
+        {
+            var expense = await _context.Expenses.FindAsync(expenseId);
+
+            if (expense == null) return NotFound();
+            
+            expense.Status = "PAID";
+            employee.ExpensesPaid += expense.Total;
+            employee.ExpenseDue -= expense.Total;
+
 
             return NoContent();
         }
