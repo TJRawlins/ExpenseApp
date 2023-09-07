@@ -61,7 +61,7 @@ namespace ExpenseApp.Migrations
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +82,7 @@ namespace ExpenseApp.Migrations
                         column: x => x.ExpenseId,
                         principalTable: "Expenses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Expenselines_items_ItemId",
                         column: x => x.ItemId,

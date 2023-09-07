@@ -21,6 +21,12 @@ namespace ExpenseApp.Controllers
             _context = context;
         }
 
+        // RECALCULATE EXPENSE TOTAL
+        private void RecalculateExpenseTotal(int expenseId)
+        {
+
+        }
+
         // GET: api/Expenselines
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Expenseline>>> GetExpenselines()
